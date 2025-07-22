@@ -1,7 +1,8 @@
-import { SeedProduct } from "@/interfaces";
+import { Product } from "@/interfaces";
+
 
 interface SeedData {
-    products: SeedProduct[],
+    products: Product[],
 }
 
 export const initialData: SeedData = {
