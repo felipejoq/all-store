@@ -18,7 +18,6 @@ export const QuantitySelector = ({ quantity }: Props) => {
 
     return (
         <div className="my-5">
-            <h1 className="font-bold mb-4">Cantidad</h1>
             <div className="flex items-center">
                 <button
                     onClick={() => onQuantityChanged(-1)}

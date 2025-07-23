@@ -49,6 +49,7 @@ export default async function ProductPage({ params }: Props) {
                 <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes} />
 
                 {/* Selector de cantidades */}
+                <h1 className="font-bold mb-4">Cantidad</h1>
                 <QuantitySelector quantity={2} />
 
                 {/* Button add to cart */}
