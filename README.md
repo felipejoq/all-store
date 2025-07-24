@@ -9,7 +9,8 @@ Esta es una aplicación que crea una Tienda en línea con la finalidad de reforz
 3. Cambiar las variables de entorno en el archivo .env
 4. Instalar las dependencias ```npm install```
 5. Ejecutar migraciones de prisma ```npx prisma migrate dev```
-6. Ejecutar la base de datos con docker con docker-compose: ```docker-compose up -d```
-7. Ejecutar el proyecto ```npm run dev```
+6. Ejecutar seed ```npm run seed```
+7. Ejecutar la base de datos con docker con docker-compose: ```docker-compose up -d```
+8. Ejecutar el proyecto ```npm run dev```
 
 ## Instrucciones de Prod
