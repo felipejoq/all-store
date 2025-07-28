@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: Props) {
 
   const pageNumber = page ? parseInt(page) : 1;
 
-  const { products, currentPage, totalPages } = await getPaginatedProductsWithImages({ page: pageNumber });
+  const { products, totalPages } = await getPaginatedProductsWithImages({ page: pageNumber });
 
   if (products.length === 0) {
     redirect('/');
