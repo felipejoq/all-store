@@ -1,7 +1,9 @@
-import { ProductMobileSlideshow, ProductSlideShow, QuantitySelector, SizeSelector } from "@/components";
-import { titleFont } from "@/config/fonts";
-import { initialData } from "@/seed/seed";
+export const revalidate = 604800; // 7 días
+
 import { notFound } from "next/navigation";
+import { getProductBySlug } from "@/actions";
+import { ProductMobileSlideshow, ProductSlideShow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
+import { titleFont } from "@/config/fonts";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -11,13 +13,11 @@ export default async function ProductPage({ params }: Props) {
 
     const { slug } = await params;
 
-    const product = initialData.products.find(product => product.slug === slug);
+    const product = await getProductBySlug(slug);
 
     if (!product) {
         notFound();
     }
-
-
 
     return (
         <div className="mt-5 mb-20 grid md:grid-cols-3 gap-3">
@@ -40,6 +40,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
             {/* Details */}
             <div className="col-span-1 px-5">
+                <StockLabel slug={product.slug} />
                 <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
                     {product.title}
                 </h1>
