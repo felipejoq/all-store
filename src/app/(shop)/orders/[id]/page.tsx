@@ -77,7 +77,7 @@ export default async function OrderPage({ params }: Props) {
                         <h2 className="text-2xl mb-2 font-bold">Dirección de entrega</h2>
                         <div className="mb-10">
                             <p className="text-xl">Felipe Jofré Quevedo</p>
-                            <p>Av. B. O'Higgins 123</p>
+                            <p>Av. B. O&apos;Higgins 123</p>
                             <p>Prov. Diguillín, Ñuble</p>
                             <p>Cod. Postal 3780000</p>
                             <p>Tel. +56 9 8888 8888</p>

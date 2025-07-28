@@ -2,7 +2,7 @@ import { Product } from "@/interfaces"
 import { ProductGridItem } from "./ProductGridItem";
 
 interface Props {
-    products: Product[];
+    products: Omit<Product, "type">[];
 }
 
 export const ProductGrid = ({ products }: Props) => {

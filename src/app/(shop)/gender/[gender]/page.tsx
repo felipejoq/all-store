@@ -1,7 +1,9 @@
+export const revalidate = 60;
+
 import { getPaginatedProductsWithImages } from "@/actions";
 import { Pagination, ProductGrid, Title } from "@/components";
 import type { Gender } from "@/interfaces";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 interface Props {
     params: Promise<{ gender: string }>;

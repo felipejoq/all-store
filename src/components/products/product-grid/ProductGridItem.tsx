@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 interface Props {
-    product: Product;
+    product: Omit<Product, "type">;
 }
 
 export const ProductGridItem = ({ product }: Props) => {
