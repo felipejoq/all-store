@@ -4,9 +4,26 @@ import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/actions";
 import { ProductMobileSlideshow, ProductSlideShow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
 import { titleFont } from "@/config/fonts";
+import { Metadata } from "next";
 
 interface Props {
     params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const slug = (await params).slug;
+
+    const product = await getProductBySlug(slug);
+
+    return {
+        title: product?.title ?? "Producto no encontrado",
+        description: product?.description ?? "",
+        openGraph: {
+            title: product?.title ?? "Producto no encontrado",
+            description: product?.description ?? "",
+            images: [`${process.env.ROOT_URL}/products/${product?.images[1]}`]
+        }
+    }
 }
 
 export default async function ProductPage({ params }: Props) {
@@ -50,7 +67,7 @@ export default async function ProductPage({ params }: Props) {
                 <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes} />
 
                 {/* Selector de cantidades */}
-                <h1 className="font-bold mb-4">Cantidad</h1>
+                <h3 className="font-bold mb-4">Cantidad</h3>
                 <QuantitySelector quantity={2} />
 
                 {/* Button add to cart */}
@@ -59,9 +76,9 @@ export default async function ProductPage({ params }: Props) {
                 </button>
 
                 {/* Description */}
-                <h3 className="font-bold text-sm">
+                <h2 className="font-bold text-sm">
                     Descripción
-                </h3>
+                </h2>
                 <p className="font-light">
                     {product.description}
                 </p>
