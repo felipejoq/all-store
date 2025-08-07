@@ -1,8 +1,10 @@
+'use client'
+
 import { QuantitySelector, SizeSelector } from "@/components"
-import { Product } from "@prisma/client"
+import { Product } from "@/interfaces";
 
 interface Props {
-    product: Product
+    product: Product;
 }
 
 export const AddToCart = ({ product }: Props) => {
