@@ -1,7 +1,8 @@
 'use client'
 
 import { QuantitySelector, SizeSelector } from "@/components"
-import { Product, Size } from "@/interfaces";
+import { CartProduct, Product, Size } from "@/interfaces";
+import { useCartStore } from "@/store";
 import { useState } from "react";
 
 interface Props {
@@ -11,9 +12,43 @@ interface Props {
 export const AddToCart = ({ product }: Props) => {
     const [size, setSize] = useState<Size | undefined>();
     const [quantity, setQuantity] = useState<number>(1);
+    const [posted, setPosted] = useState<boolean>(false);
+
+    const addProductToCart = useCartStore(state => state.addProductToCart);
+
+    const addToCart = () => {
+        setPosted(true);
+
+        if (!size) return;
+
+        const cartProduct: CartProduct = {
+            id: product.id,
+            slug: product.slug,
+            image: product.images[0],
+            price: product.price,
+            title: product.title,
+            quantity: quantity,
+            size: size,
+        }
+
+        addProductToCart(cartProduct);
+        setPosted(false);
+        setQuantity(1);
+        setSize(undefined);
+    }
 
     return (
         <>
+            {
+                posted && !size && (
+                    <span className="text-red-500 mt-4 text-sm fade-in">
+                        {/* Mensaje de error */}
+                        Debe seleccionar una talla.
+                    </span>
+                )
+
+            }
+
             {/* Selector de tallas */}
             <SizeSelector
                 selectedSize={size}
@@ -30,7 +65,10 @@ export const AddToCart = ({ product }: Props) => {
             />
 
             {/* Button add to cart */}
-            <button className="btn-primary my-5 cursor-pointer">
+            <button
+                onClick={addToCart}
+                className="btn-primary my-5 cursor-pointer"
+            >
                 Agregar al carrito
             </button>
         </>
