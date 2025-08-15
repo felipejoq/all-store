@@ -1,0 +1,39 @@
+'use client'
+
+import { useCartStore } from "@/store"
+import { useEffect, useState } from "react";
+
+export const OrderSummary = () => {
+
+    const [loaded, setLoaded] = useState(false);
+    const { getSummaryInformation } = useCartStore(); 
+    const { itemsInCart, subTotal, tax, total } = getSummaryInformation();
+
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
+    if (!loaded) {
+        return <p>Loading...</p>
+    }
+
+    return (
+        <div className="grid grid-cols-2 items-center">
+            <span>No. Producto</span>
+            <span className="text-right">
+                {itemsInCart === 1 ? "1 artículo" : `${itemsInCart} artículos`}
+            </span>
+
+            <span>Subtotal</span>
+            <span className="text-right">$ {subTotal}</span>
+
+            <span>Impuestos (19%)</span>
+            <span className="text-right">$ {tax}</span>
+
+            <span className="text-2xl mt-5">Total</span>
+            <span className="text-right text-2xl mt-5">
+                $ {total}
+            </span>
+        </div>
+    )
+}

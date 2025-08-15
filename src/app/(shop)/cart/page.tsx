@@ -3,6 +3,7 @@ import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
+import { OrderSummary } from "./ui/OrderSummary";
 
 const productsInCart = [
     initialData.products[0],
@@ -39,21 +40,7 @@ export default function CartPage() {
 
                     <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
                         <h2 className="text-2xl mb-2">Resumen de orden</h2>
-                        <div className="grid grid-cols-2 items-center">
-                            <span>No. Producto</span>
-                            <span className="text-right">3 Productos</span>
-
-                            <span>Subtotal</span>
-                            <span className="text-right">$ 100</span>
-
-                            <span>Impuestos (19%)</span>
-                            <span className="text-right">$ 19</span>
-
-                            <span className="text-2xl mt-5">Total</span>
-                            <span className="text-right text-2xl mt-5">
-                                $ 100
-                            </span>
-                        </div>
+                        <OrderSummary />
 
                         <div className="my-5 w-full">
                             <Link className="flex btn-primary justify-center" href={'/checkout/address'}>
