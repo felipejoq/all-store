@@ -4,12 +4,13 @@ import { initialData } from './seed'
 
 async function main() {
 
-    const { categories, products } = initialData;
+    const { categories, products, users } = initialData;
 
     // Reset de las tablas
     await prisma.productImage.deleteMany();
     await prisma.product.deleteMany();
     await prisma.category.deleteMany();
+    await prisma.user.deleteMany();
 
     // Inseta las categorías
     const categoriesDb = await prisma.category.createManyAndReturn({
@@ -35,6 +36,8 @@ async function main() {
             ...rest
         } = product;
 
+        if (!type) throw new Error('Sin la propiedad type');
+
         const productDb = await prisma.product.create({
             data: { ...rest, categoryId: categoriesMap[type] }
         });
@@ -45,12 +48,16 @@ async function main() {
         await prisma.productImage.createMany({ data: imagesData })
     });
 
+    // Agregar los usuarios:
+    await prisma.user.createMany({
+        data: users
+    })
+
     return 'Seed sembrada'
 }
 
 (async () => {
     if (process.env.NODE_ENV === 'production') return;
 
-    await main()
-        .then(console.log)
+    await main().then(console.log)
 })()
